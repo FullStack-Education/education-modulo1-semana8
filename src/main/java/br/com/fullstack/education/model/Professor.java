@@ -1,20 +1,22 @@
 package br.com.fullstack.education.model;
 
+import lombok.AccessLevel;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+@Data
 public class Professor {
 
     private static Integer proximoId = 1;
     @Getter private static List<Professor> professoresCadastrados = new ArrayList<>();
 
-    private Integer id;
-    @Setter private String nome;
-    @Setter private String especialidade;
+    @Setter(AccessLevel.NONE) private Integer id;
+    private String nome;
+    private String especialidade;
 
     public static Professor salvar(Professor professor) throws Exception {
         if (validar(professor)) {
@@ -50,11 +52,11 @@ public class Professor {
     }
 
     private static boolean validar(Professor professor) throws Exception {
-        if (professor.getNome() == null || professor.getNome().isEmpty()) {
+        if (professor.getNome() == null || professor.getNome().isBlank()) {
             throw new Exception("Nome é obrigatório");
         }
 
-        if (professor.getEspecialidade() == null || professor.getEspecialidade().isEmpty()) {
+        if (professor.getEspecialidade() == null || professor.getEspecialidade().isBlank()) {
             throw new Exception("Especialidade é obrigatório");
         }
 

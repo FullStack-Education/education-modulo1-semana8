@@ -16,6 +16,7 @@ public class Curso {
     @Setter private String nome;
     @Setter private String descricao;
     @Setter private Integer cargaHoraria;
+    private List<Professor> professores = new ArrayList<>();
 
     public static Curso salvar(Curso curso) throws Exception {
         if (validar(curso)) {
@@ -52,7 +53,7 @@ public class Curso {
     }
 
     private static boolean validar(Curso curso) throws Exception {
-        if (curso.getNome() == null || curso.getNome().isEmpty()) {
+        if (curso.getNome() == null || curso.getNome().isBlank()) {
             throw new Exception("Nome é obrigatório");
         }
 
@@ -62,4 +63,12 @@ public class Curso {
 
         return true;
     }
+
+    public static Curso adicionarProfessor(Integer id, Integer professorId) throws Exception {
+        Curso curso = Curso.buscarPorId(id);
+        Professor professor = Professor.buscarPorId(professorId);
+        curso.getProfessores().add(professor);
+        return curso;
+    }
+
 }

@@ -1,6 +1,7 @@
 package br.com.fullstack.education.controller;
 
 import br.com.fullstack.education.model.Curso;
+import br.com.fullstack.education.model.Professor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,12 @@ public class CursoController {
     @DeleteMapping("{id}")
     public boolean delete(@PathVariable Integer id) throws Exception {
         return Curso.excluir(id);
+    }
+
+    /** Adicionar professor a um curso */
+    @PostMapping("{id}/add-professor")
+    public Curso postProfessor(@PathVariable Integer id, @RequestBody Professor professor) throws Exception {
+        return Curso.adicionarProfessor(id, professor.getId());
     }
 
 }
