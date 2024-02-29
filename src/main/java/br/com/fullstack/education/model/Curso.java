@@ -36,6 +36,12 @@ public class Curso {
         return null;
     }
 
+    public static boolean excluir(Integer id) throws Exception {
+        Curso curso = buscarPorId(id);
+        cursosCadastrados.remove(curso);
+        return true;
+    }
+
     public static Curso buscarPorId(Integer id) throws Exception {
         for (Curso curso : cursosCadastrados) {
             if (curso.getId().equals(id)) {

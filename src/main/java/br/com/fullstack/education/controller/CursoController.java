@@ -35,8 +35,8 @@ public class CursoController {
 
     /** Exclusão */
     @DeleteMapping("{id}")
-    public String delete(@PathVariable Integer id) {
-        return "DELETE /cursos/" + id;
+    public boolean delete(@PathVariable Integer id) throws Exception {
+        return Curso.excluir(id);
     }
 
 }
