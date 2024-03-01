@@ -12,7 +12,7 @@ import java.util.List;
 public class Professor {
 
     private static Integer proximoId = 1;
-    @Getter private static List<Professor> professoresCadastrados = new ArrayList<>();
+    @Getter private static final List<Professor> professoresCadastrados = new ArrayList<>();
 
     @Setter(AccessLevel.NONE) private Integer id;
     private String nome;

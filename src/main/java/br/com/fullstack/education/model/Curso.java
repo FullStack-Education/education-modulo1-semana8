@@ -10,7 +10,7 @@ import java.util.List;
 public class Curso {
 
     private static Integer proximoId = 1;
-    @Getter private static List<Curso> cursosCadastrados = new ArrayList<>();
+    @Getter private static final List<Curso> cursosCadastrados = new ArrayList<>();
 
     private Integer id;
     @Setter private String nome;
@@ -18,27 +18,13 @@ public class Curso {
     @Setter private Integer cargaHoraria;
     private List<Professor> professores = new ArrayList<>();
 
-    public static Curso salvar(Curso curso) throws Exception {
-        if (validar(curso)) {
-            curso.id = proximoId++;
-            cursosCadastrados.add(curso);
-        }
+    public static Curso inserir(Curso curso) {
+        curso.id = proximoId++;
+        cursosCadastrados.add(curso);
         return curso;
     }
 
-    public static Curso salvar(Integer id, Curso curso) throws Exception {
-        if (validar(curso)) {
-            Curso cadastrado = buscarPorId(id);
-            cadastrado.setNome(curso.getNome());
-            cadastrado.setDescricao(curso.getDescricao());
-            cadastrado.setCargaHoraria(curso.getCargaHoraria());
-            return cadastrado;
-        }
-        return null;
-    }
-
-    public static boolean excluir(Integer id) throws Exception {
-        Curso curso = buscarPorId(id);
+    public static boolean excluir(Curso curso) {
         cursosCadastrados.remove(curso);
         return true;
     }
@@ -52,23 +38,8 @@ public class Curso {
         throw new Exception("Curso não encontrado");
     }
 
-    private static boolean validar(Curso curso) throws Exception {
-        if (curso.getNome() == null || curso.getNome().isBlank()) {
-            throw new Exception("Nome é obrigatório");
-        }
-
-        if (curso.getCargaHoraria() == null || curso.getCargaHoraria() < 100) {
-            throw new Exception("Carga horária não informada ou menor que 100");
-        }
-
-        return true;
-    }
-
-    public static Curso adicionarProfessor(Integer id, Integer professorId) throws Exception {
-        Curso curso = Curso.buscarPorId(id);
-        Professor professor = Professor.buscarPorId(professorId);
+    public static void adicionarProfessor(Curso curso, Professor professor){
         curso.getProfessores().add(professor);
-        return curso;
     }
 
 }
