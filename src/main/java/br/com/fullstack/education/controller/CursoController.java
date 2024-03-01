@@ -46,4 +46,10 @@ public class CursoController {
         return Curso.adicionarProfessor(id, professor.getId());
     }
 
+    /** Adicionar professor a um curso com PATH VARIABLE / PATH PARAM */
+    @PostMapping("{id}/add-professor/{professorId}")
+    public Curso postProfessorPorId(@PathVariable Integer id, @PathVariable Integer professorId) throws Exception {
+        return Curso.adicionarProfessor(id, professorId);
+    }
+
 }
