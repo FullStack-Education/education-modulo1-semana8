@@ -47,6 +47,10 @@ public class ProfessorService {
 
     public boolean excluir(Integer id) throws Exception {
         Professor professor = buscarPorId(id);
+        return excluir(professor);
+    }
+
+    public boolean excluir(Professor professor) {
         return Professor.excluir(professor);
     }
 

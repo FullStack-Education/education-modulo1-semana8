@@ -1,6 +1,7 @@
 package br.com.fullstack.education.controller;
 
 import br.com.fullstack.education.model.Professor;
+import br.com.fullstack.education.service.CursoProfessorService;
 import br.com.fullstack.education.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +12,9 @@ import java.util.List;
 @RequestMapping("professores")
 public class ProfessorController {
 
-    private final ProfessorService professorService;
+    private final CursoProfessorService professorService;
 
-    public ProfessorController(ProfessorService professorService) {
+    public ProfessorController(CursoProfessorService professorService) {
         this.professorService = professorService;
     }
 
@@ -44,7 +45,7 @@ public class ProfessorController {
     /** Exclusão */
     @DeleteMapping("{id}")
     public boolean delete(@PathVariable Integer id) throws Exception {
-        return professorService.excluir(id);
+        return professorService.removerProfessor(id);
     }
 
 }
